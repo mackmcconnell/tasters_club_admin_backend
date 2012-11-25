@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+@plan1 = Plan.new(:name => "Bourbon Gold", :monthly_charge => 65)
+@plan1.save
+@plan2 = Plan.new(:name => "Bourbon Monthly", :monthly_charge => 65)
+@plan2.save
+@plan3 = Plan.new(:name => "Scotch Gold", :monthly_charge => 75)
+@plan3.save
+@plan4 = Plan.new(:name => "Bourbon Monthly", :monthly_charge => 75)
+@plan4.save

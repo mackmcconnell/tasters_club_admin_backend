@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'rest-client'
 gem 'stripe'
 
 # To use ActiveModel has_secure_password

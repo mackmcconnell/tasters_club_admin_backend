@@ -1,0 +1,6 @@
+
+
+<% @plans.each do |plan| %>
+  <%= link_to "#{plan.name}", new_plan_subscription_path(plan) %>
+  <br>
+<% end %>

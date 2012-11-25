@@ -1,4 +1,10 @@
 Stripe::Application.routes.draw do
+
+  resources :plans do
+    resources :subscriptions
+  end
+
+  # root :to => 'plans#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
