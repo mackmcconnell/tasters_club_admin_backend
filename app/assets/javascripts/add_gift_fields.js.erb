@@ -1,5 +1,9 @@
 $(document).ready(function() {
+  $('.fields_for_gift_recipients').hide();
   $('#subscription_gift_true').on("click", function() {
-    $('.fields_for_gift_recipients').css("display", "true");
+    $('.fields_for_gift_recipients').show();
+  });
+  $('#subscription_gift_false').on("click", function() {
+    $('.fields_for_gift_recipients').hide();
   });
 });

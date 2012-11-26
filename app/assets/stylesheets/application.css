@@ -9,5 +9,46 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require foundation
  *= require_tree .
  */
+
+.divider {
+  height: 1px;
+  background-color: #ABABAB;
+}
+
+.wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+
+.security {
+  margin-top: 15px;
+  margin-left: 560px;
+  text-align: right;
+}
+
+
+.container {
+  border: 1px solid #ABABAB;
+  border-radius: 10px;
+  margin-top: 15px;
+  background-color: white;
+}
+
+.widget {
+  background-color: #E3E3E3;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.form {
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+img {
+  float:right;
+}

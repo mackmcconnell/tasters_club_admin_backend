@@ -1,51 +1,128 @@
-<%= form_for ([@plan, @subscription]) do |f| %>
-  <% if @subscription.errors.any? %>
-    <div class="error_messages">
-      <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
-      <ul>
-        <% @subscription.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="security">
+  This page is secure.  <%= image_tag("lock.png", :size => "16x16")%>
+</div>
+<div class="container">
+  <h4 class="subheader" style="line-height: 8px;">Taster's Club Whiskey</h4>
+  <div class="divider"> </div>
+    <div class="plan_type">
+      <h2><%= @plan.name %></h2>
     </div>
-  <% end %>
+    <div class="divider"> </div>
+      <div class="intro">
+        <% if @plan.id == 1 || @plan.id == 2 %>
+          <h5> Every month, you’ll receive a standard size bottle (750mL) of amazing Bourbon Whiskey from our curated list. Our       Bourbons come from the Bourbon capitals of America – the Kentucky Bourbon Trail, throughout Tennessee and from newer Bourbon capitals, such as Texas, Colorado and California. <br><br>When you sign up, we enroll you in our Whiskey 101 course – expect plenty of informational material, including whiskey profiles, tasting notes, style guide, production techniques and more. </h5>
+        <% elsif @plan.id == 3 || @plan.id == 4 %>
+          <h5>Every month, you’ll receive a standard size bottle (750mL) of high-quality Scotch Whisky from all around Scotland representing the Speyside, Highland,Lowland, Islay and Campbeltown regions that make Scotch Whisky history. <br><br>When you sign up, we enroll you in our Whiskey 101 course – expect plenty of informational material, including whiskey profiles, tasting notes, style guide, production techniques and more.</h5>
+        <% end %>
+      </div>
 
-  <%= f.hidden_field :plan_id %>
-  <%= f.hidden_field :stripe_card_token %>
+    <%= form_for ([@plan, @subscription]) do |f| %>
+      <% if @subscription.errors.any? %>
+        <div class="error_messages">
+          <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+          <ul>
+            <% @subscription.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <br>
+      <p>We cannot honor returns.</p>
+      <% if @plan.id == 2 || @plan.id == 4 %>
+        <p>SUBSCRIPTION WILL STOP AFTER 3 MONTHS</p>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
+      <div class="divider"> </div>
 
-  <div class="field" >
-    <%= f.label :is_this_a_gift? %>
-    <%= f.radio_button :gift, true %> <%= f.label :gift, "Yes" %>
-    <%= f.radio_button :gift, false, :checked => 'checked' %> <%= f.label :gift, "No" %>
+      <div class="form">
+        
+        <div class="widget" style="padding: 20px 20px 0px 20px">
+          <div class="field_radio">
+            <%= f.label :is_this_a_gift? %>
+            <ul id="radio-buttons">
+              <li><%= f.radio_button :gift, true %><%= f.label :gift, "Yes" %></li>
+              <li><%= f.radio_button :gift, false, :checked => 'checked' %> <%= f.label :gift, "No" %></li>
+            </ul>
+          </div>
+          <div class="fields_for_gift_recipients">
+            <%= f.label :recipient_name %>
+            <%= f.text_field :gift_name %>
+          </div>
+          <div class="fields_for_gift_recipients">
+            <%= f.label :recipient_email %>
+            <%= f.text_field :recipient_email %>
+          </div>
+        </div>
+<br>
+      <%= f.hidden_field :plan_id %>
+      <%= f.hidden_field :stripe_card_token %>
+      <h4>Contact Information:</h4>
+      <div class="widget">
+        <div class="field">
+          <%= f.label :Purchaser_email %>
+          <%= f.text_field :email %>
+        </div><br>
+      </div>
+      <br>
+      <h4>Shipping Information</h4>
+      <div class="widget">  
+        <div class="field">
+        <%= f.label :first_name %>
+        <%= f.text_field :ship_first_name %>
+        </div>
+        <div class="field">
+        <%= f.label :last_name %>
+        <%= f.text_field :ship_last_name %>
+        </div>
+        <div class="field">
+        <%= f.label :address_1 %>
+        <%= f.text_field :ship_address_1 %>
+        </div>
+        <div class="field">
+        <%= f.label :address_2 %>
+        <%= f.text_field :ship_address_2 %>
+        </div>
+        <div class="field">
+        <%= f.label :city %>
+        <%= f.text_field :ship_city %>
+        </div>
+        <div class="field">
+        <%= f.label :state %>
+        <%= f.text_field :ship_state %>
+        </div>
+        <div class="field">
+        <%= f.label :zip %>
+        <%= f.text_field :ship_zip %>
+        </div>
+      </div>
+      <br>
+      
+      
+      <br>
+      <h4>Billing Information:</h4>
+      <div class="widget">
+        <%= image_tag("lock.png", :size => "16x16")%>
+        <div class="field">
+          <%= label_tag :card_number, "*Card Number" %><img alt='Credit card logos' title='Credit card logos' src='http://payments.intuit.com/payments/landing_pages/LB/default.jsp?c=VMAD&l=H&s=1&b=E3E3E3'/>
+          <%= text_field_tag :card_number, nil, name: nil, :size => 75 %>
+        </div><br>
+        <div class="field">
+          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= text_field_tag :card_code, nil, name: nil %>
+        </div><br>
+        <div class="field">
+          <%= label_tag :card_month, "Card Expiration" %>
+          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+        </div>
+      </div>
+      <div id="stripe_error">
+        <noscript>JavaScript is not enabled and is require for this form. First enable it in your web browser settings.</noscript>
+      </div>
+      <div class="actions">
+        <%= f.submit "Subscribe" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="fields_for_gift_recipients" style="display:none;">
-    <%= f.label :recipient_name %>
-    <%= f.text_field :gift_name %>
-  </div>
-
-  <div class="field">
-    <%= label_tag :card_number, "Credit Card Number" %>
-    <%= text_field_tag :card_number, nil, name: nil %>
-  </div>
-  <div class="field">
-    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-    <%= text_field_tag :card_code, nil, name: nil %>
-  </div>
-  <div class="field">
-    <%= label_tag :card_month, "Card Expiration" %>
-    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
-    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
-  </div>
-  <div id="stripe_error">
-    <noscript>JavaScript is not enabled and is require for this form. First enable it in your web browser settings.</noscript>
-  </div>
-  <div class="actions">
-    <%= f.submit "Subscribe" %>
-  </div>
-<% end %>
+</div>

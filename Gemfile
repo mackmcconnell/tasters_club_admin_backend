@@ -24,6 +24,10 @@ gem 'jquery-rails'
 gem 'rest-client'
 gem 'stripe'
 
+group :assets do
+  gem 'zurb-foundation', '~> 2.2'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125052223) do
+ActiveRecord::Schema.define(:version => 20121126062005) do
 
   create_table "plans", :force => true do |t|
     t.string   "name"
@@ -20,18 +20,7 @@ ActiveRecord::Schema.define(:version => 20121125052223) do
     t.datetime "updated_at",     :null => false
   end
 
-  create_table "subscriptions", :force => true do |t|
-    t.string   "email"
-    t.integer  "card_number"
-    t.integer  "card_code"
-    t.string   "card_month"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "stripe_customer_token"
-    t.integer  "plan_id"
-    t.boolean  "gift"
-    t.string   "gift_name"
-    t.text     "shipping_address"
-  end
+# Could not dump table "subscriptions" because of following StandardError
+#   Unknown type 'email' for column 'recipient_email'
 
 end
