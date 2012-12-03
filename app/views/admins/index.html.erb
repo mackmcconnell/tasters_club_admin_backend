@@ -1,0 +1,30 @@
+<% @data = HTTParty.get("https://api.stripe.com/v1/customers", :headers => { 'Authorization' => "Bearer #{Stripe.api_key}" }) %>
+
+<%= @data["count"]%> Total Customers
+<br><br>
+
+
+<table>
+  <% @data["data"].each do |customer| %>
+	  <tr>
+		  <td>
+			  <%= customer["description"] %>
+		  </td>
+		  <td>
+			  <%= customer["created"] %>
+		  </td>
+		  <td>
+			  <%= customer["subscription"]["status"] %>
+		  </td>
+		  <td>
+			  <%= customer["subscription"]["plan"]["name"] %>
+		  </td>
+		  <td>
+			  <%= customer["subscription"]["plan"]["interval_count"] %>
+		  </td>
+		  <td>
+			  <%= link_to "delete", plan_subscription_delete_path(customer["subscription"]["plan"]["id"], customer["id"]) %>
+		  </td>
+	  </tr>
+  <% end %>
+</table>

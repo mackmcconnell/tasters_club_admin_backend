@@ -1,8 +1,13 @@
 Stripe::Application.routes.draw do
 
   resources :plans do
-    resources :subscriptions
+    resources :subscriptions do
+      match "delete" => "subscriptions#delete", :via => :get
+    end
   end
+  
+  
+  resources :admins, :only => [:index]
 
   # root :to => 'plans#index'
   # The priority is based upon order of creation:

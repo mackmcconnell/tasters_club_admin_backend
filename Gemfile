@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'rest-client'
 gem 'stripe'
+gem 'httparty'
 
 group :assets do
   gem 'zurb-foundation', '~> 2.2'
