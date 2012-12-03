@@ -1,4 +1,4 @@
-<% @data = HTTParty.get("https://api.stripe.com/v1/customers", :headers => { 'Authorization' => "Bearer #{Stripe.api_key}" }) %>
+<% @data = Stripe::Customer.all %>
 
 <%= @data["count"]%> Total Customers
 <br><br>
@@ -23,8 +23,12 @@
 			  <%= customer["subscription"]["plan"]["interval_count"] %>
 		  </td>
 		  <td>
+			  <%= link_to "history", plan_subscription_history_path(customer["subscription"]["plan"]["id"], customer["id"]) %>
+		  </td> 
+		  <td>
 			  <%= link_to "delete", plan_subscription_delete_path(customer["subscription"]["plan"]["id"], customer["id"]) %>
 		  </td>
+
 	  </tr>
   <% end %>
 </table>

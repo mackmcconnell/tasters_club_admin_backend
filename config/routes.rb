@@ -3,6 +3,7 @@ Stripe::Application.routes.draw do
   resources :plans do
     resources :subscriptions do
       match "delete" => "subscriptions#delete", :via => :get
+      match "history" => "subscriptions#history", :via => :get
     end
   end
   

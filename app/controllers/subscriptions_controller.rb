@@ -19,13 +19,13 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
   end
   
-  def delete(customer)
-    puts "========================="
-    puts "========================="
-    puts "========================="
-    puts "========================="
-    deleted_customer = Stripe::Customer.retrieve(customer["id"])
+  def delete
+    deleted_customer = Stripe::Customer.retrieve(params[:subscription_id])
     deleted_customer.delete
+    redirect_to admins_path
+  end
+  
+  def history
     redirect_to admins_path
   end
 
