@@ -1,8 +1,12 @@
 
-
-<% @plans.each do |plan| %>
-  <%= link_to "#{plan.name}", new_plan_subscription_path(plan) %>
-  <br>
-<% end %>
+<table>
+  <% Stripe::Plan.all.each do |plan| %>
+    <tr>
+      <td>
+        <%= link_to plan.name, new_plan_subscription_path(plan) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to "Admin", admins_path %>

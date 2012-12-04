@@ -1,8 +1,14 @@
 class SubscriptionsController < ApplicationController
 
   def new
-    @plan = Plan.find(params[:plan_id])
+    @plan = Stripe::Plan.retrieve("3")
     @subscription = Subscription.new
+    puts "=========================="
+    puts "=========================="
+    puts @plan
+    puts @subscription
+    puts "=========================="
+    puts "=========================="
   end
 
   def create
